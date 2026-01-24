@@ -310,6 +310,26 @@ python3 base_agent.py
 curl http://localhost:8080/health
 ```
 
+### Performance Benchmarking
+```bash
+# Basic benchmark (100 agents, 60 seconds)
+python3 benchmark.py --agents 100 --duration 60
+
+# Scale benchmark (1000 agents, 50 concurrent, 5 minutes)
+python3 benchmark.py --agents 1000 --concurrent 50 --duration 300
+
+# Task submission benchmark
+python3 benchmark.py --agents 100 --type task --duration 120
+
+# Save results to JSON
+python3 benchmark.py --agents 1000 --output results.json
+```
+
+**Benchmark Metrics:**
+- Throughput (requests/second)
+- Latency (avg, p50, p95, p99)
+- Success rate (target: 98%+)
+
 ---
 
 ## 🎯 Roadmap
@@ -325,7 +345,7 @@ curl http://localhost:8080/health
 - [ ] Deploy 100 agents
 - [ ] Deploy 1,000 agents
 - [ ] Deploy 10,000 agents
-- [ ] Performance benchmarks
+- [x] Performance benchmark tool (`benchmark.py`)
 - [ ] Stress testing
 
 ### Phase 3: Production (Next)

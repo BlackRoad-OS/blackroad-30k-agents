@@ -86,7 +86,7 @@ spec:
     kind: Deployment
     name: blackroad-agents-quantum
   minReplicas: 100
-  maxReplicas: 1000
+  maxReplicas: 30000  # Full 30K agent capacity
   metrics:
   - type: Resource
     resource:

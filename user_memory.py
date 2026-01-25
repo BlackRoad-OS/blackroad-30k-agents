@@ -184,6 +184,11 @@ class MemoryStore(ABC):
         """Remove expired memories, returns count removed"""
         pass
 
+    @abstractmethod
+    def delete_user_profile(self, user_id: str) -> bool:
+        """Delete user profile (for GDPR compliance)"""
+        pass
+
 
 class InMemoryStore(MemoryStore):
     """
@@ -303,6 +308,13 @@ class InMemoryStore(MemoryStore):
             for mid in to_delete:
                 self.delete_memory(mid)
             return len(to_delete)
+
+    def delete_user_profile(self, user_id: str) -> bool:
+        with self._lock:
+            if user_id in self._profiles:
+                del self._profiles[user_id]
+                return True
+            return False
 
 
 class RedisMemoryStore(MemoryStore):
@@ -487,6 +499,13 @@ class RedisMemoryStore(MemoryStore):
     def cleanup_expired(self) -> int:
         # Redis handles expiration automatically via TTL
         return 0
+
+    def delete_user_profile(self, user_id: str) -> bool:
+        try:
+            return bool(self._redis.delete(self._profile_key(user_id)))
+        except Exception as e:
+            self.logger.error(f"Failed to delete profile: {e}")
+            return False
 
 
 class UserMemory:
@@ -694,7 +713,7 @@ class UserMemory:
         """Delete all memories for a user (GDPR compliance)"""
         count = self.store.delete_user_memories(user_id)
         # Also delete profile
-        # Note: Would need to add delete_user_profile to interface
+        self.store.delete_user_profile(user_id)
         self.logger.info(f"Deleted {count} memories for user {user_id}")
         return count
 

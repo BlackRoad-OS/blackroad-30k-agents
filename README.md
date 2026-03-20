@@ -351,7 +351,7 @@ Contributions welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## 📜 License
 
-MIT License - see [LICENSE](LICENSE) for details
+BlackRoad Proprietary License - see [LICENSE](LICENSE) for details
 
 ---
 
@@ -405,3 +405,13 @@ For commercial licensing inquiries:
 - **Organization:** BlackRoad OS, Inc.
 
 See [LICENSE](LICENSE) for complete terms.
+
+---
+
+**Proprietary Software — BlackRoad OS, Inc.**
+
+This software is proprietary to BlackRoad OS, Inc. Source code is publicly visible for transparency and collaboration. Commercial use, forking, and redistribution are prohibited without written authorization.
+
+**BlackRoad OS — Pave Tomorrow.**
+
+*Copyright 2024-2026 BlackRoad OS, Inc. All Rights Reserved.*
